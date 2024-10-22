@@ -1,5 +1,6 @@
 package br.com.devset.reclamesaude.service;
 
+import br.com.devset.reclamesaude.dto.UsuarioExibicaoDto;
 import br.com.devset.reclamesaude.model.Reclamacao;
 import br.com.devset.reclamesaude.model.Usuario;
 import br.com.devset.reclamesaude.repository.UsuarioRepository;
@@ -15,28 +16,37 @@ public class UsuarioService {
     @Autowired
     UsuarioRepository usuarioRepository;
 
-    public Usuario cadastraUsuario(Usuario usuario) {
-        return usuarioRepository.save(usuario);    }
+    public UsuarioExibicaoDto cadastraUsuario(Usuario usuario) {
+        return new UsuarioExibicaoDto(usuarioRepository.save(usuario));
+    }
 
-    public List<Usuario> listar() {
-            return usuarioRepository.findAll();    }
+    public List<UsuarioExibicaoDto> listar() {
+        List<UsuarioExibicaoDto> novalista = new ArrayList<>();
+        List<Usuario> usuarios = usuarioRepository.findAll();
+        for (Usuario usuario : usuarios) {
+            novalista.add(new UsuarioExibicaoDto(usuario));
+        }
+        return novalista;
+    }
 
-    public Usuario buscaUsuarioPorId(Long id) {
+    public UsuarioExibicaoDto buscaUsuarioPorId(Long id) {
         Optional<Usuario> usuario = usuarioRepository.findById(id);
         if (usuario.isPresent()) {
-            return usuario.get();
-        }else {
+            return new UsuarioExibicaoDto(usuario.get());
+        } else {
             throw new RuntimeException("Usuario não encontrado");
         }
     }
+
     public void excluirUsuario(Long id) {
         Optional<Usuario> usuario = usuarioRepository.findById(id);
         if (usuario.isPresent()) {
             usuarioRepository.delete(usuario.get());
-        }else {
+        } else {
             throw new RuntimeException("Usuario não encontrado");
         }
     }
+
     public void atualizar(Usuario usuario) {
         Optional<Usuario> usuarioExistente = usuarioRepository.findById(usuario.getId());
         if (usuarioExistente.isPresent()) {
@@ -45,6 +55,7 @@ public class UsuarioService {
             throw new RuntimeException("Usuário não encontrado com ID: " + usuario.getId());
         }
     }
+
     public List<Reclamacao> listarReclamacoes(Long idUsuario) {
         Optional<Usuario> usuario = usuarioRepository.findById(idUsuario);
         if (usuario.isPresent()) {

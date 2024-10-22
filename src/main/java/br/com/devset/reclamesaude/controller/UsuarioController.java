@@ -1,5 +1,6 @@
 package br.com.devset.reclamesaude.controller;
 
+import br.com.devset.reclamesaude.dto.UsuarioExibicaoDto;
 import br.com.devset.reclamesaude.model.Reclamacao;
 import br.com.devset.reclamesaude.model.Usuario;
 import br.com.devset.reclamesaude.service.UsuarioService;
@@ -19,14 +20,17 @@ public class UsuarioController {
 
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
-    public List<Usuario> listar() {
+    public List<UsuarioExibicaoDto> listar() {
         return usuarioService.listar();
     }
+
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public void cadastrar(@RequestBody Usuario usuario) {
-        usuarioService.cadastraUsuario(usuario);
+    public UsuarioExibicaoDto cadastrar(@RequestBody Usuario usuario) {
+        return usuarioService.cadastraUsuario(usuario);
+
     }
+
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void remover(@PathVariable Long id) {
@@ -38,6 +42,7 @@ public class UsuarioController {
     public void atualizar(@RequestBody Usuario usuario) {
         usuarioService.atualizar(usuario);
     }
+
     @GetMapping("/listarreclamacoes/{id}")
     @ResponseStatus(HttpStatus.OK)
     public List<Reclamacao> buscarReclamacoes(@PathVariable Long id) {
@@ -50,10 +55,9 @@ public class UsuarioController {
     }
 
 
-
     @GetMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public Usuario buscarPorId(@PathVariable Long id) {
+    public UsuarioExibicaoDto buscarPorId(@PathVariable Long id) {
         return usuarioService.buscaUsuarioPorId(id);
     }
 }

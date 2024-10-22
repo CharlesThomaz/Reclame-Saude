@@ -1,5 +1,6 @@
 package br.com.devset.reclamesaude.controller;
 
+import br.com.devset.reclamesaude.dto.ReclamacaoExibicaoDto;
 import br.com.devset.reclamesaude.model.Reclamacao;
 import br.com.devset.reclamesaude.service.ReclamacaoService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,14 +21,16 @@ public class ReclamacaoController {
     public void cadastrarReclamacao(@RequestBody Reclamacao reclamacao) {
         reclamacaoService.cadastrarReclamacao(reclamacao);
     }
+
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
-    public List<Reclamacao> listarReclamacao() {
+    public List<ReclamacaoExibicaoDto> listarReclamacao() {
         return reclamacaoService.listarReclamacao();
     }
+
     @GetMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public Reclamacao getReclamacao(@PathVariable Long id) {
+    public ReclamacaoExibicaoDto getReclamacao(@PathVariable Long id) {
         return reclamacaoService.getReclamacao(id);
     }
 
@@ -36,6 +39,7 @@ public class ReclamacaoController {
     public void atualizarReclamacao(@RequestBody Reclamacao reclamacao) {
         reclamacaoService.atualizarReclamacao(reclamacao);
     }
+
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void removerReclamacao(@PathVariable Long id) {

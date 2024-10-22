@@ -3,6 +3,7 @@ package br.com.devset.reclamesaude.model;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
+
 import java.util.List;
 
 @Entity
@@ -21,10 +22,11 @@ public class Hospital {
     private List<Reclamacao> reclamacoes; // Lista de reclamações associadas ao hospital
 
     // Construtor padrão
-    public Hospital() {}
+    public Hospital() {
+    }
 
     // Construtor com parâmetros
-    public Hospital( String nome) {
+    public Hospital(String nome) {
         this.nome = nome;
     }
 
@@ -52,6 +54,7 @@ public class Hospital {
     public void setReclamacoes(List<Reclamacao> reclamacoes) {
         this.reclamacoes = reclamacoes;
     }
+
     @JsonProperty("quantidadeDeReclamacoes")
     public int getQuantidadeDeReclamacoes() {
         return (reclamacoes != null) ? reclamacoes.size() : 0;

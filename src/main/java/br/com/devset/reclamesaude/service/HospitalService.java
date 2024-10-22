@@ -31,7 +31,7 @@ public class HospitalService {
         Optional<Hospital> hospital = hospitalRepository.findById(id);
         if (hospital.isPresent()) {
             return hospital.get();
-        }else{
+        } else {
             throw new RuntimeException("Hospital não encontrado");
         }
     }
@@ -41,23 +41,25 @@ public class HospitalService {
         Optional<Hospital> hospital = hospitalRepository.findById(id);
         if (hospital.isPresent()) {
             hospitalRepository.deleteById(id);
-        }else {
+        } else {
             throw new RuntimeException("Hospital não encontrado");
         }
     }
+
     public void atualizarHospital(Hospital hospital) {
         Optional<Hospital> hospitalExiste = hospitalRepository.findById(hospital.getId());
         if (hospitalExiste.isPresent()) {
             hospitalRepository.save(hospital);
-        }else{
+        } else {
             throw new RuntimeException("Hospital não encontrado");
         }
     }
+
     public List<Reclamacao> listarReclamacoes(Long id) {
         Optional<Hospital> hospital = hospitalRepository.findById(id);
         if (hospital.isPresent()) {
             return hospital.get().getReclamacoes();
-        }else {
+        } else {
             throw new RuntimeException("Hospital não encontrado");
         }
 

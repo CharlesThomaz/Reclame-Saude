@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
 import java.util.List;
 
 @RestController
@@ -18,12 +19,11 @@ public class HospitalController {
     HospitalService hospitalService;
 
 
-
     // Endpoint para criar um novo hospital
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public Hospital createHospital(@RequestBody Hospital hospital) {
-        return  hospitalService.saveHospital(hospital);
+        return hospitalService.saveHospital(hospital);
     }
 
     // Endpoint para obter todos os hospitais
@@ -31,7 +31,7 @@ public class HospitalController {
     @ResponseStatus(HttpStatus.OK)
     public List<Hospital> getAllHospitais() {
         return hospitalService.getAllHospitais();
-   }
+    }
 
     // Endpoint para obter um hospital por ID
     @GetMapping("/{id}")
@@ -46,6 +46,7 @@ public class HospitalController {
     public void deleteHospital(@PathVariable Long id) {
         hospitalService.deleteHospital(id);
     }
+
     @PutMapping
     @ResponseStatus(HttpStatus.OK)
     public void updateHospital(@RequestBody Hospital hospital) {

@@ -21,8 +21,8 @@ public class Reclamacao {
     private String descricao; // Descrição da reclamação
 
     // Construtores, getters e setters...
-    public Reclamacao() {}
-
+    public Reclamacao() {
+    }
 
 
     public Reclamacao(Hospital hospital, Usuario usuario, String descricao) {

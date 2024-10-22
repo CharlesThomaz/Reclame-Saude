@@ -21,7 +21,8 @@ public class Usuario {
     @JsonIgnore
     private List<Reclamacao> reclamacoes; // Lista de reclamações do usuário
 
-    public Usuario() {}
+    public Usuario() {
+    }
 
     public Usuario(String nome, String email, String senha) {
         this.nome = nome;
