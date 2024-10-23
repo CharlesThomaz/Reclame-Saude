@@ -1,8 +1,12 @@
 package br.com.devset.reclamesaude.service;
 
+import br.com.devset.reclamesaude.dto.HospitalCadastroDto;
+import br.com.devset.reclamesaude.dto.HospitalExibicaoDto;
+import br.com.devset.reclamesaude.exception.NaoEncontradoException;
 import br.com.devset.reclamesaude.model.Hospital;
 import br.com.devset.reclamesaude.model.Reclamacao;
 import br.com.devset.reclamesaude.repository.HospitalRepository;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,8 +21,10 @@ public class HospitalService {
 
 
     // Método para salvar um novo hospital
-    public Hospital saveHospital(Hospital hospital) {
-        return hospitalRepository.save(hospital);
+    public HospitalExibicaoDto saveHospital(HospitalCadastroDto hospitalCadastroDto) {
+        Hospital hospital = new Hospital();
+        BeanUtils.copyProperties(hospitalCadastroDto, hospital);
+        return new HospitalExibicaoDto(hospitalRepository.save(hospital));
     }
 
     // Método para obter todos os hospitais
@@ -32,7 +38,7 @@ public class HospitalService {
         if (hospital.isPresent()) {
             return hospital.get();
         } else {
-            throw new RuntimeException("Hospital não encontrado");
+            throw new NaoEncontradoException("Hospital não encontrado");
         }
     }
 
@@ -42,7 +48,7 @@ public class HospitalService {
         if (hospital.isPresent()) {
             hospitalRepository.deleteById(id);
         } else {
-            throw new RuntimeException("Hospital não encontrado");
+            throw new NaoEncontradoException("Hospital não encontrado");
         }
     }
 
@@ -51,7 +57,7 @@ public class HospitalService {
         if (hospitalExiste.isPresent()) {
             hospitalRepository.save(hospital);
         } else {
-            throw new RuntimeException("Hospital não encontrado");
+            throw new NaoEncontradoException("Hospital não encontrado");
         }
     }
 
@@ -60,7 +66,7 @@ public class HospitalService {
         if (hospital.isPresent()) {
             return hospital.get().getReclamacoes();
         } else {
-            throw new RuntimeException("Hospital não encontrado");
+            throw new NaoEncontradoException("Hospital não encontrado");
         }
 
     }

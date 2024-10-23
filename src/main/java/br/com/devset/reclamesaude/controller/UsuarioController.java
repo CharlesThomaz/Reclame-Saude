@@ -1,9 +1,11 @@
 package br.com.devset.reclamesaude.controller;
 
+import br.com.devset.reclamesaude.dto.UsuarioCadastroDto;
 import br.com.devset.reclamesaude.dto.UsuarioExibicaoDto;
 import br.com.devset.reclamesaude.model.Reclamacao;
 import br.com.devset.reclamesaude.model.Usuario;
 import br.com.devset.reclamesaude.service.UsuarioService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -26,8 +28,8 @@ public class UsuarioController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public UsuarioExibicaoDto cadastrar(@RequestBody Usuario usuario) {
-        return usuarioService.cadastraUsuario(usuario);
+    public UsuarioExibicaoDto cadastrar(@RequestBody @Valid UsuarioCadastroDto usuarioCadastroDto) {
+        return usuarioService.cadastraUsuario(usuarioCadastroDto);
 
     }
 

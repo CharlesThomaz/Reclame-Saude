@@ -1,12 +1,14 @@
 package br.com.devset.reclamesaude.controller;
 
 
+import br.com.devset.reclamesaude.dto.HospitalCadastroDto;
+import br.com.devset.reclamesaude.dto.HospitalExibicaoDto;
 import br.com.devset.reclamesaude.model.Hospital;
 import br.com.devset.reclamesaude.model.Reclamacao;
 import br.com.devset.reclamesaude.service.HospitalService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -22,8 +24,8 @@ public class HospitalController {
     // Endpoint para criar um novo hospital
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public Hospital createHospital(@RequestBody Hospital hospital) {
-        return hospitalService.saveHospital(hospital);
+    public HospitalExibicaoDto createHospital(@RequestBody @Valid HospitalCadastroDto hospitalCadastroDto) {
+        return hospitalService.saveHospital(hospitalCadastroDto);
     }
 
     // Endpoint para obter todos os hospitais

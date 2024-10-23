@@ -1,8 +1,11 @@
 package br.com.devset.reclamesaude.controller;
 
+import br.com.devset.reclamesaude.dto.ReclamacaoCadastroDto;
 import br.com.devset.reclamesaude.dto.ReclamacaoExibicaoDto;
 import br.com.devset.reclamesaude.model.Reclamacao;
+import br.com.devset.reclamesaude.repository.ReclamacaoRepository;
 import br.com.devset.reclamesaude.service.ReclamacaoService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -18,8 +21,9 @@ public class ReclamacaoController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public void cadastrarReclamacao(@RequestBody Reclamacao reclamacao) {
-        reclamacaoService.cadastrarReclamacao(reclamacao);
+    public ReclamacaoExibicaoDto cadastrarReclamacao(@RequestBody @Valid ReclamacaoCadastroDto reclamacaoCadastroDto) {
+        return reclamacaoService.cadastrarReclamacao(reclamacaoCadastroDto);
+
     }
 
     @GetMapping

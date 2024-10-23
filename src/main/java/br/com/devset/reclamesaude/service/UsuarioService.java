@@ -1,9 +1,12 @@
 package br.com.devset.reclamesaude.service;
 
+import br.com.devset.reclamesaude.dto.UsuarioCadastroDto;
 import br.com.devset.reclamesaude.dto.UsuarioExibicaoDto;
+import br.com.devset.reclamesaude.exception.NaoEncontradoException;
 import br.com.devset.reclamesaude.model.Reclamacao;
 import br.com.devset.reclamesaude.model.Usuario;
 import br.com.devset.reclamesaude.repository.UsuarioRepository;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,7 +19,9 @@ public class UsuarioService {
     @Autowired
     UsuarioRepository usuarioRepository;
 
-    public UsuarioExibicaoDto cadastraUsuario(Usuario usuario) {
+    public UsuarioExibicaoDto cadastraUsuario(UsuarioCadastroDto usuarioCadastroDto) {
+        Usuario usuario = new Usuario();
+        BeanUtils.copyProperties(usuarioCadastroDto, usuario);
         return new UsuarioExibicaoDto(usuarioRepository.save(usuario));
     }
 
@@ -34,7 +39,7 @@ public class UsuarioService {
         if (usuario.isPresent()) {
             return new UsuarioExibicaoDto(usuario.get());
         } else {
-            throw new RuntimeException("Usuario não encontrado");
+            throw new NaoEncontradoException("Usuario não encontrado");
         }
     }
 
@@ -43,7 +48,7 @@ public class UsuarioService {
         if (usuario.isPresent()) {
             usuarioRepository.delete(usuario.get());
         } else {
-            throw new RuntimeException("Usuario não encontrado");
+            throw new NaoEncontradoException("Usuario não encontrado");
         }
     }
 
@@ -52,7 +57,7 @@ public class UsuarioService {
         if (usuarioExistente.isPresent()) {
             usuarioRepository.save(usuario);
         } else {
-            throw new RuntimeException("Usuário não encontrado com ID: " + usuario.getId());
+            throw new NaoEncontradoException("Usuário não encontrado com ID: " + usuario.getId());
         }
     }
 
@@ -62,7 +67,7 @@ public class UsuarioService {
             List<Reclamacao> reclamacoes = usuario.get().getReclamacoes();
             return (reclamacoes != null) ? reclamacoes : new ArrayList<>(); // Retorna lista vazia se reclamacoes for null
         } else {
-            throw new RuntimeException("Usuário não encontrado");
+            throw new NaoEncontradoException("Usuário não encontrado");
         }
     }
 
