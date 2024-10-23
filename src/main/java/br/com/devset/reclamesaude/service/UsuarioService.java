@@ -1,8 +1,10 @@
 package br.com.devset.reclamesaude.service;
 
+import br.com.devset.reclamesaude.dto.HospitalExibicaoDto;
 import br.com.devset.reclamesaude.dto.UsuarioCadastroDto;
 import br.com.devset.reclamesaude.dto.UsuarioExibicaoDto;
 import br.com.devset.reclamesaude.exception.NaoEncontradoException;
+import br.com.devset.reclamesaude.model.Hospital;
 import br.com.devset.reclamesaude.model.Reclamacao;
 import br.com.devset.reclamesaude.model.Usuario;
 import br.com.devset.reclamesaude.repository.UsuarioRepository;
@@ -71,5 +73,21 @@ public class UsuarioService {
         }
     }
 
+    public UsuarioExibicaoDto buscarUsuarioPorNome(String nome) {
+        Optional<Usuario> usuario = usuarioRepository.buscarPorNome(nome);
+        if (usuario.isPresent()) {
+            return new UsuarioExibicaoDto(usuario.get());
+        }else {
+            throw new NaoEncontradoException("Usuario não encontrado");
+        }
+    }
+    public UsuarioExibicaoDto buscarUsuarioPorEmail(String email) {
+        Optional<Usuario> usuario = usuarioRepository.findByEmail(email);
+        if (usuario.isPresent()) {
+            return new UsuarioExibicaoDto(usuario.get());
+        }else{
+            throw new NaoEncontradoException("Usuario não encontrado");
+        }
+    }
 
 }

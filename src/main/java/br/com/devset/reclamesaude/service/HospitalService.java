@@ -70,5 +70,13 @@ public class HospitalService {
         }
 
     }
+    public HospitalExibicaoDto buscarHospitalPorNome(String nome) {
+        Optional<Hospital> hospital = hospitalRepository.buscarPorNome(nome);
+        if (hospital.isPresent()) {
+            return new HospitalExibicaoDto(hospital.get());
+        }else {
+            throw new NaoEncontradoException("Hospital não encontrado");
+        }
+    }
 
 }

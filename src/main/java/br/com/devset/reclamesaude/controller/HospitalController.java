@@ -60,4 +60,10 @@ public class HospitalController {
     public List<Reclamacao> listarReclamacoes(@PathVariable Long id) {
         return hospitalService.listarReclamacoes(id);
     }
+
+    @GetMapping(value = "/nome",params = "nome") ///api/hospital/nome?nome=HOSPITAL ULTRASETE
+    @ResponseStatus(HttpStatus.OK)
+    public HospitalExibicaoDto buscarHospitalPorNome(@RequestParam String nome) {
+        return hospitalService.buscarHospitalPorNome(nome);
+    }
 }

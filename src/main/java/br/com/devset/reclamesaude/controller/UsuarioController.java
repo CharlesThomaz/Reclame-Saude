@@ -1,5 +1,6 @@
 package br.com.devset.reclamesaude.controller;
 
+import br.com.devset.reclamesaude.dto.HospitalExibicaoDto;
 import br.com.devset.reclamesaude.dto.UsuarioCadastroDto;
 import br.com.devset.reclamesaude.dto.UsuarioExibicaoDto;
 import br.com.devset.reclamesaude.model.Reclamacao;
@@ -61,5 +62,16 @@ public class UsuarioController {
     @ResponseStatus(HttpStatus.OK)
     public UsuarioExibicaoDto buscarPorId(@PathVariable Long id) {
         return usuarioService.buscaUsuarioPorId(id);
+    }
+
+    @GetMapping("/nome/{nome}")
+    @ResponseStatus(HttpStatus.OK)
+    public UsuarioExibicaoDto buscarUsuarioPorNome(@PathVariable String nome) {
+        return usuarioService.buscarUsuarioPorNome(nome);
+    }
+    @GetMapping(value = "/email", params = "email")
+    @ResponseStatus(HttpStatus.OK)
+    public UsuarioExibicaoDto buscarUsuarioPorEmail(@RequestParam String email) {
+        return usuarioService.buscarUsuarioPorEmail(email);
     }
 }
