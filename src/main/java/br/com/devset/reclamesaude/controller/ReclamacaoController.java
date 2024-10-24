@@ -7,6 +7,8 @@ import br.com.devset.reclamesaude.repository.ReclamacaoRepository;
 import br.com.devset.reclamesaude.service.ReclamacaoService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
@@ -28,8 +30,8 @@ public class ReclamacaoController {
 
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
-    public List<ReclamacaoExibicaoDto> listarReclamacao() {
-        return reclamacaoService.listarReclamacao();
+    public Page<ReclamacaoExibicaoDto> listarReclamacao(Pageable paginacao) {
+        return reclamacaoService.listarReclamacao(paginacao);
     }
 
     @GetMapping("/{id}")

@@ -2,6 +2,8 @@ package br.com.devset.reclamesaude.model;
 
 import jakarta.persistence.*;
 
+import java.time.LocalDateTime;
+
 @Entity
 @Table(name = "tbl_reclamacao")
 public class Reclamacao {
@@ -18,6 +20,9 @@ public class Reclamacao {
     @JoinColumn(name = "usuario_id", nullable = false) // Chave estrangeira
     private Usuario usuario;
 
+
+    private LocalDateTime dataReclamacao = LocalDateTime.now();
+
     private String descricao; // Descrição da reclamação
 
     // Construtores, getters e setters...
@@ -29,6 +34,15 @@ public class Reclamacao {
         this.hospital = hospital;
         this.usuario = usuario;
         this.descricao = descricao;
+        this.dataReclamacao = LocalDateTime.now();
+    }
+
+    public LocalDateTime getDataReclamacao() {
+        return dataReclamacao;
+    }
+
+    public void setDataReclamacao(LocalDateTime dataReclamacao) {
+        this.dataReclamacao = dataReclamacao;
     }
 
     public Long getId() {

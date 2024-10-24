@@ -11,6 +11,8 @@ import br.com.devset.reclamesaude.repository.ReclamacaoRepository;
 import br.com.devset.reclamesaude.repository.UsuarioRepository;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -57,18 +59,11 @@ public class ReclamacaoService {
         return new ReclamacaoExibicaoDto(reclamacao);
     }
 
-    public List<ReclamacaoExibicaoDto> listarReclamacao() {
-        List<ReclamacaoExibicaoDto> novaLista = new ArrayList<>();
-        List<Reclamacao> listaReclamacao = reclamacaoRepository.findAll();
 
-        if (!listaReclamacao.isEmpty()) {
-            for (Reclamacao reclamacao : listaReclamacao) {
-                novaLista.add(new ReclamacaoExibicaoDto(reclamacao));
-            }
+        public Page<ReclamacaoExibicaoDto> listarReclamacao(Pageable paginacao) {
+            return reclamacaoRepository.findAll(paginacao)
+                    .map(ReclamacaoExibicaoDto::new);
         }
-
-        return novaLista;
-    }
 
 
     public void excluirReclamacao(Long id) {
