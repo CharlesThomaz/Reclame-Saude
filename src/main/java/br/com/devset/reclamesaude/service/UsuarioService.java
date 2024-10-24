@@ -81,13 +81,13 @@ public class UsuarioService {
             throw new NaoEncontradoException("Usuario não encontrado");
         }
     }
-    public UsuarioExibicaoDto buscarUsuarioPorEmail(String email) {
-        Optional<Usuario> usuario = usuarioRepository.findByEmail(email);
-        if (usuario.isPresent()) {
-            return new UsuarioExibicaoDto(usuario.get());
-        }else{
-            throw new NaoEncontradoException("Usuario não encontrado");
-        }
-    }
+//    public UsuarioExibicaoDto buscarUsuarioPorEmail(String email) {
+//        Optional<Usuario> usuario = usuarioRepository.findByEmail(email);
+//        if (usuario.isPresent()) {
+//            return new UsuarioExibicaoDto(usuario.get());
+//        }else{
+//            throw new NaoEncontradoException("Usuario não encontrado");
+//        }
+//    }
 
 }

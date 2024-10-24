@@ -15,7 +15,10 @@ public record UsuarioCadastroDto(
 
         @NotBlank(message = "A senha é obrigatória!")
         @Size(min = 6, max = 10, message = "A senha deve conter entre 6 e 10 caracteres!")
-        String senha
+        String senha,
+
+        @NotBlank(message = "Seu papel é obrigatório para definir suas permissões de acesso!")
+        String papel
 ) {
 
 }
