@@ -1,6 +1,7 @@
 package br.com.devset.reclamesaude.testes;
 
 import br.com.devset.reclamesaude.model.Hospital;
+import br.com.devset.reclamesaude.model.PapeisDoUsuario;
 import br.com.devset.reclamesaude.model.Reclamacao;
 import br.com.devset.reclamesaude.model.Usuario;
 

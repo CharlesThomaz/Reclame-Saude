@@ -22,7 +22,7 @@ public class Usuario implements UserDetails {
     private String senha;
 
     @Enumerated(EnumType.STRING)
-    private PapeisDoUsuario papeisDoUsuario;
+    private PapeisDoUsuario papeisDoUsuario = PapeisDoUsuario.USER;
 
     @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL)
     @JsonIgnore
@@ -35,6 +35,7 @@ public class Usuario implements UserDetails {
         this.nome = nome;
         this.email = email;
         this.senha = senha;
+        papeisDoUsuario = PapeisDoUsuario.USER;
     }
 
     public Long getId() {

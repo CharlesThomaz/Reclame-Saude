@@ -10,6 +10,7 @@ import br.com.devset.reclamesaude.model.Usuario;
 import br.com.devset.reclamesaude.repository.UsuarioRepository;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -22,8 +23,11 @@ public class UsuarioService {
     UsuarioRepository usuarioRepository;
 
     public UsuarioExibicaoDto cadastraUsuario(UsuarioCadastroDto usuarioCadastroDto) {
+        String senhaCriptografada = new BCryptPasswordEncoder().encode(usuarioCadastroDto.senha());
+
         Usuario usuario = new Usuario();
         BeanUtils.copyProperties(usuarioCadastroDto, usuario);
+        usuario.setSenha(senhaCriptografada);
         return new UsuarioExibicaoDto(usuarioRepository.save(usuario));
     }
 

@@ -69,9 +69,5 @@ public class UsuarioController {
     public UsuarioExibicaoDto buscarUsuarioPorNome(@PathVariable String nome) {
         return usuarioService.buscarUsuarioPorNome(nome);
     }
-//    @GetMapping(value = "/email", params = "email")
-//    @ResponseStatus(HttpStatus.OK)
-//    public UsuarioExibicaoDto buscarUsuarioPorEmail(@RequestParam String email) {
-//        return usuarioService.buscarUsuarioPorEmail(email);
-//    }
 }
+

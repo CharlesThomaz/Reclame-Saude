@@ -4,12 +4,18 @@ public enum PapeisDoUsuario {
     ADMIN("admin"),
     USER("user");
 
-    private String papeis;
+    private final String papel;
 
-    private PapeisDoUsuario(String papeis) {
-        this.papeis = papeis;
+    PapeisDoUsuario(String papel) {
+        this.papel = papel;
     }
-    public String getPapeis() {
-        return papeis;
+
+    public String getPapel() {
+        return papel;
+    }
+
+    // Método para obter o papel padrão
+    public static PapeisDoUsuario getPapelDefault() {
+        return USER; // Define USER como o papel padrão
     }
 }
